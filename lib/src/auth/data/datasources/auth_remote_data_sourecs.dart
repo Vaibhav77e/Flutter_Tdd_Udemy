@@ -33,8 +33,15 @@ class AuthenticationRemoteSourceImpl implements AuthenticationRemoteSource {
     try {
       final response = await _httpClient.post(
           Uri.parse('https://$kBaseUrl$createNewUserEndpoint'),
+          headers:{
+            'Content-type': 'application/json'
+          },
           body: jsonEncode(
-              {'createdAt': createdAt, 'name': name, 'avatar': avatar}));
+              {'createdAt': createdAt,
+               'name': name
+               //'avatar': avatar,
+               }));
+        
         print('1 : $kBaseUrl$createNewUserEndpoint');
       if (response.statusCode != 200 && response.statusCode != 202) {
         print('2 : $kBaseUrl$createNewUserEndpoint');
